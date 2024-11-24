@@ -13,6 +13,7 @@ const font_size = 16
 const win_width = 500
 const win_height = 512
 const bg_color = sdl.Color{0x96, 0xE2, 0x82, 0xFF}
+const win_title = c'Flappy Learning ported to SDL2'
 
 struct Bird {
 mut:
@@ -330,7 +331,7 @@ fn (mut app App) sdl_setup() ! {
 	}
 	sdl.init(sdl.init_video)
 	ttf.init()
-	app.window = sdl.create_window(c'Hello SDL2_image', sdl.windowpos_undefined, sdl.windowpos_undefined,
+	app.window = sdl.create_window(win_title, sdl.windowpos_undefined, sdl.windowpos_undefined,
 		win_width, win_height, 0)
 	app.renderer = sdl.create_renderer(app.window, -1, u32(sdl.RendererFlags.accelerated) | u32(sdl.RendererFlags.presentvsync))
 	flags := int(image.InitFlags.png)
