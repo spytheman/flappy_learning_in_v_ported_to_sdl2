@@ -192,6 +192,14 @@ fn get_image_asset_path(path string) string {
 	}
 }
 
+fn get_font_asset_path(path string) string {
+	$if android {
+		return os.join_path('fonts', path)
+	} $else {
+		return os.resource_abs_path(os.join_path('assets', 'fonts', path))
+	}
+}
+
 fn emsg(msg string) IError {
 	e := unsafe { cstring_to_vstring(sdl.get_error()) }
 	return error('${msg}, error: ${e}')
@@ -314,7 +322,7 @@ fn (app &App) display() {
 }
 
 fn (app &App) get_font(name string) !&ttf.Font {
-	font_path := os.real_path(os.join_path('assets/fonts', name))
+	font_path := get_font_asset_path(name)
 	return ttf.open_font(font_path.str, font_size)
 }
 
