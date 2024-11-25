@@ -185,7 +185,7 @@ fn (mut app App) run() {
 }
 
 fn get_image_asset_path(path string) string {
-	$if android {
+	$if android && !termux {
 		return os.join_path('img', path)
 	} $else {
 		return os.resource_abs_path(os.join_path('assets', 'img', path))
@@ -193,7 +193,7 @@ fn get_image_asset_path(path string) string {
 }
 
 fn get_font_asset_path(path string) string {
-	$if android {
+	$if android && !termux {
 		return os.join_path('fonts', path)
 	} $else {
 		return os.resource_abs_path(os.join_path('assets', 'fonts', path))
